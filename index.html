@@ -54,7 +54,22 @@
                 const selectedDiv = document.getElementById("selected");
                 const img = event.target.cloneNode(true);
                 img.style.cursor = "default";
-                selectedDiv.appendChild(img);
+
+                // Check if the image is already in the selectedDiv
+                const existingImages = selectedDiv.getElementsByTagName('img');
+                let imageExists = false;
+
+                for (let i = 0; i < existingImages.length; i++) {
+                    if (existingImages[i].alt === img.alt) {
+                        imageExists = true;
+                        break;
+                    }
+                }
+
+                // Append the image if it doesn't already exist
+                if (!imageExists) {
+                    selectedDiv.appendChild(img);
+                }
             }
         </script>
     </head>
