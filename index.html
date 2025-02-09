@@ -6,14 +6,15 @@
         <title>Responsive Image List</title>
         <style>
             body {
-                font-family: Arial, sans-serif;
+                background: linear-gradient(to top right, #5598da, #e86868); /* Light gradient background */
+                font-family: 'Arial', sans-serif;
+                padding: 20px;
                 margin: 0;
-                padding: 0;
                 display: flex;
-                flex-direction: column;
+                justify-content: center;
                 align-items: center;
-                min-height: 100vh;
-                background-color: #f4f4f4;
+                height: 100vh;
+                overflow: hidden;
             }
             .selected {
                 width: 100%;
@@ -24,51 +25,89 @@
                 justify-content: center;
                 margin-bottom: 20px;
                 padding: 20px;
-                background-color: #fff;
+                background-color: #d2b877;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                 border-radius: 8px;
             }
             .gallery {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 10px;
-                justify-content: center;
-                max-width: 1200px;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 20px;
                 padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                background-color: #59b36b;
             }
             .gallery img, .selected img {
-                width: 100%;
-                max-width: 300px;
-                height: auto;
-                border-radius: 8px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                width: 50%;
+                border-radius: 10px;
+                transition: transform 0.3s ease, filter 0.3s ease;
                 cursor: pointer;
-                transition: transform 0.2s;
             }
             .gallery img:hover {
                 transform: scale(1.05);
+                filter: brightness(1.1);
+            }
+            .checked {
+                border: 3px solid #0b3494; /* Green color for checked */
+                background-color: #a60b0b; /* Light green background when selected */
+                transition: background-color 0.3s ease, border-color 0.3s ease;
+            }
+
+            #selected {
+                margin-top: 20px;
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            #selected img {
+                width: 120px;
+                height: 120px;
+                object-fit: cover;
+                border-radius: 8px;
+                opacity: 0;
+                animation: fadeIn 0.5s forwards; /* Animation added here */
+                transition: transform 0.3s ease;
+            }
+
+            #selected img:hover {
+                transform: scale(1.1);
+            }
+            /* Animation for smooth fade-in effect */
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
             }
         </style>
         <script>
             function selectImage(event) {
                 const selectedDiv = document.getElementById("selected");
-                const img = event.target.cloneNode(true);
-                img.style.cursor = "default";
+                const img = event.target;
 
-                // Check if the image is already in the selectedDiv
-                const existingImages = selectedDiv.getElementsByTagName('img');
-                let imageExists = false;
+                // Toggle the 'checked' class
+                img.classList.toggle('checked');
 
-                for (let i = 0; i < existingImages.length; i++) {
-                    if (existingImages[i].alt === img.alt) {
-                        imageExists = true;
-                        break;
+                // If the image is checked, append it to the selected div
+                if (img.classList.contains('checked')) {
+                    const clonedImg = img.cloneNode(true);
+                    clonedImg.style.cursor = "default";
+                    selectedDiv.appendChild(clonedImg);
+                } else {
+                    // Remove the image from selected div if unchecked
+                    const images = selectedDiv.getElementsByTagName('img');
+                    for (let i = 0; i < images.length; i++) {
+                        if (images[i].src === img.src) {
+                            selectedDiv.removeChild(images[i]);
+                            break;
+                        }
                     }
-                }
-
-                // Append the image if it doesn't already exist
-                if (!imageExists) {
-                    selectedDiv.appendChild(img);
                 }
             }
         </script>
