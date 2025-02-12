@@ -1,22 +1,22 @@
 
 const selectedDiv = document.getElementById("selected");
-document.addEventListener("DOMContentLoaded", function () {
+// document.addEventListener("DOMContentLoaded", function () {
 
-    const storedImages = JSON.parse(localStorage.getItem("selectedImages")) || [];
+//     const storedImages = JSON.parse(localStorage.getItem("selectedImages")) || [];
 
-    selectedDiv.innerHTML = ""; // Clear previous content
+//     selectedDiv.innerHTML = ""; // Clear previous content
 
-    if (storedImages.length > 0) {
-        storedImages.forEach(src => {
-            const img = document.createElement("label");
-            img.textContent = src;
-            // img.alt = "Selected Image";
-            selectedDiv.appendChild(img);
-        });
-    } else {
-        selectedDiv.innerHTML = "<p>No images selected.</p>";
-    }
-});
+//     if (storedImages.length > 0) {
+//         storedImages.forEach(src => {
+//             const img = document.createElement("label");
+//             img.textContent = src;
+//             // img.alt = "Selected Image";
+//             selectedDiv.appendChild(img);
+//         });
+//     } else {
+//         selectedDiv.innerHTML = "<p>No images selected.</p>";
+//     }
+// });
 
 
 
@@ -30,7 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
         storedImages.forEach((src, index) => {
             const img = document.createElement("label");
             img.textContent = src;
-            img.alt = "Selected Image";
+            img.alt = src;
+            img.title = src;
             img.draggable = true;
             img.id = "label-" + index;
             img.ondragstart = dragStart;
@@ -76,7 +77,7 @@ function dropImage(event) {
         redColumn.ondrop = dropImage;
         blueColumn.ondragover = allowDrop;
         blueColumn.ondrop = dropImage;
-
+        selectedDiv.removeChild(draggedImage);
         // Determine drop target and assign image to correct column
         if (event.target.className === 'red-column') {
             if(!document.querySelectorAll('tr td.red-column')[document.querySelectorAll('tr td.red-column').length - 1].querySelector('label'))
