@@ -5,46 +5,58 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Responsive Image List</title>
         <style>
+
             body {
-                background: linear-gradient(to top right, #5598da, #e86868); /* Light gradient background */
+                background: linear-gradient(to top right, #5598da, #68e899); /* Light gradient background */
                 font-family: 'Arial', sans-serif;
                 padding: 20px;
                 margin: 0;
                 display: flex;
-                justify-content: center;
-                align-items: center;
+                justify-content: flex-start;
+                align-items: start;
                 height: 100vh;
                 overflow: hidden;
             }
             .selected {
                 width: 100%;
-                max-width: 1200px;
+                min-width: 100%;
                 display: flex;
                 flex-wrap: wrap;
                 gap: 10px;
                 justify-content: center;
                 margin-bottom: 20px;
                 padding: 20px;
-                background-color: #d2b877;
+                background-color: #232019;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                 border-radius: 8px;
             }
             .gallery {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: 20px;
-                padding: 20px;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                background-color: #59b36b;
+                width: 100%;
+                display: flex;
+                margin: 10px;
+                flex-wrap: wrap;
+                justify-content: left;
+                padding: 10px;
+                background-color: #bef2c2;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                border-radius: 8px;
+                overflow-y: scroll;
+                height: 25vw;
+                justify-content: flex-start;
             }
-            .gallery img, .selected img {
-                width: 50%;
+            .gallery label, .selected label {
+                width: 6vw;
+                min-width: 70px;
+                height: 6vw;
                 border-radius: 10px;
                 transition: transform 0.3s ease, filter 0.3s ease;
                 cursor: pointer;
+                margin: 5px;
+                text-align: center;
+                background-color: cadetblue;
+                color: firebrick;
             }
-            .gallery img:hover {
+            .gallery label:hover {
                 transform: scale(1.05);
                 filter: brightness(1.1);
             }
@@ -61,17 +73,26 @@
                 flex-wrap: wrap;
             }
 
-            #selected img {
-                width: 120px;
-                height: 120px;
+            #selected label {
+                width: 10vw;
+                min-width: 70px;
                 object-fit: cover;
                 border-radius: 8px;
                 opacity: 0;
                 animation: fadeIn 0.5s forwards; /* Animation added here */
                 transition: transform 0.3s ease;
             }
-
-            #selected img:hover {
+            button {
+                margin-top: 20px;
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 5px;
+            }
+            #selected label:hover {
                 transform: scale(1.1);
             }
             /* Animation for smooth fade-in effect */
@@ -85,42 +106,61 @@
                     transform: translateY(0);
                 }
             }
-        </style>
-        <script>
-            function selectImage(event) {
-                const selectedDiv = document.getElementById("selected");
-                const img = event.target;
-
-                // Toggle the 'checked' class
-                img.classList.toggle('checked');
-
-                // If the image is checked, append it to the selected div
-                if (img.classList.contains('checked')) {
-                    const clonedImg = img.cloneNode(true);
-                    clonedImg.style.cursor = "default";
-                    selectedDiv.appendChild(clonedImg);
-                } else {
-                    // Remove the image from selected div if unchecked
-                    const images = selectedDiv.getElementsByTagName('img');
-                    for (let i = 0; i < images.length; i++) {
-                        if (images[i].src === img.src) {
-                            selectedDiv.removeChild(images[i]);
-                            break;
-                        }
-                    }
+            @media (max-width : 800px){
+                .gallery{
+                    min-width: 300px;
                 }
-            }
-        </script>
+            }    
+
+        </style>
+       
     </head>
     <body>
-        <div id="selected" class="selected"></div>
+       <div class="container">
         <div class="gallery">
-            <img src="https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/360950-Mobile-HeroSlim-Media-240x135?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=480&hei=270&qlt=100&fmt=png-alpha&fit=constrain" alt="Image 1" onclick="selectImage(event)">
+            <!-- <img src="https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/360950-Mobile-HeroSlim-Media-240x135?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=480&hei=270&qlt=100&fmt=png-alpha&fit=constrain" alt="Image 1" onclick="selectImage(event)">
             <img src="https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/360950-Mobile-Overview-Media-Tab1-328x270?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=656&hei=540&qlt=100&fmt=png-alpha&fit=constrain" alt="Image 2" onclick="selectImage(event)">
             <img src="https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/360950-Mobile-HeroSlim-Media-240x135?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=480&hei=270&qlt=100&fmt=png-alpha&fit=constrain" alt="Image 3" onclick="selectImage(event)">
             <img src="https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/360950-Mobile-HeroSlim-Media-240x135?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=480&hei=270&qlt=100&fmt=png-alpha&fit=constrain" alt="Image 4" onclick="selectImage(event)">
             <img src="https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/360950-Mobile-HeroSlim-Media-240x135?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=480&hei=270&qlt=100&fmt=png-alpha&fit=constrain" alt="Image 5" onclick="selectImage(event)">
             <img src="https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/360950-Mobile-HeroSlim-Media-240x135?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=480&hei=270&qlt=100&fmt=png-alpha&fit=constrain" alt="Image 6" onclick="selectImage(event)">
+            <img src="https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/360950-Mobile-HeroSlim-Media-240x135?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=480&hei=270&qlt=100&fmt=png-alpha&fit=constrain" alt="Image 7" onclick="selectImage(event)">
+            <img src="https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/360950-Mobile-HeroSlim-Media-240x135?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=480&hei=270&qlt=100&fmt=png-alpha&fit=constrain" alt="Image 8" onclick="selectImage(event)">
+            <img src="https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/360950-Mobile-HeroSlim-Media-240x135?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=480&hei=270&qlt=100&fmt=png-alpha&fit=constrain" alt="Image 9" onclick="selectImage(event)">
+            <img src="https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/360950-Mobile-HeroSlim-Media-240x135?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=480&hei=270&qlt=100&fmt=png-alpha&fit=constrain" alt="Image 10" onclick="selectImage(event)"> -->
+            <label alt="Image 1" onclick="selectImage(event)">Rony</label>
+            <label alt="Image 2" onclick="selectImage(event)">Jamil</label>
+            <label alt="Image 3" onclick="selectImage(event)">Salman</label>
+            <label alt="Image 4" onclick="selectImage(event)">Showeb</label>
+            <label alt="Image 5" onclick="selectImage(event)">Mizan</label>
+            <label alt="Image 6" onclick="selectImage(event)">Rahad</label>
+            <label alt="Image 7" onclick="selectImage(event)">Touhid</label>
+            <label alt="Image 8" onclick="selectImage(event)">Mithu</label>
+            <label alt="Image 9" onclick="selectImage(event)">Shamsheer</label>
+            <label alt="Image 10" onclick="selectImage(event)">Shah Poran</label>
+            <label alt="Image 11" onclick="selectImage(event)">Akram</label>
+            <label alt="Image 12" onclick="selectImage(event)">Mehedi</label>
+            <label alt="Image 13" onclick="selectImage(event)">Rabbani</label>
+            <label alt="Image 14" onclick="selectImage(event)">Forhad</label>
+            <label alt="Image 15" onclick="selectImage(event)">Jubair</label>
+            <label alt="Image 16" onclick="selectImage(event)">Shamol</label>
+            <label alt="Image 17" onclick="selectImage(event)">Emon</label>
+            <label alt="Image 18" onclick="selectImage(event)">Rafi</label>
+            <label alt="Image 19" onclick="selectImage(event)">Ehan</label>
+            <label alt="Image 20" onclick="selectImage(event)">Ovi</label>
+            <label alt="Image 21" onclick="selectImage(event)">Kaium</label>
+            <label alt="Image 22" onclick="selectImage(event)">Ibrahim</label>
+            <label alt="Image 23" onclick="selectImage(event)">Kalam</label>
+            <label alt="Image 24" onclick="selectImage(event)">Ruhul</label>
+
         </div>
+        <div>
+            <button onclick="goToSelectedPage()">Go to Selected Page</button>
+            <button onclick="clean()">Clear</button>
+        </div> 
+        <div id="selected" class="selected"></div>
+        
+       </div>   
     </body>
+    <script src="worker.js"></script>
 </html>

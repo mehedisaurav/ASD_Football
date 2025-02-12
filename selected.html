@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selected Players</title>
+    <style>
+         body {
+                background: linear-gradient(to top right, #5598da, #e86868); /* Light gradient background */
+                font-family: 'Arial', sans-serif;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                height: 100vh;
+                overflow: hidden;
+            }
+            .selected {
+                width: 100%;
+                display: flex;
+                margin: 10px;
+                flex-wrap: wrap;
+                justify-content: left;
+                padding: 10px;
+                background-color: #bef2c2;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                border-radius: 8px;
+                overflow-y: scroll;
+                height: 15vw;
+            }
+        .selected label {
+            width: 2vw;
+            min-width: 80px;
+            height: 5vw;
+            padding: 5px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            text-align: center;
+            background-color: cadetblue;
+            color: firebrick;
+            margin: 5px;
+        }
+
+        table {
+            width: 80%;
+            max-width: 600px;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        th, td {
+            width: 50%;
+            padding: 20px;
+            border: 2px solid #75399e;
+        }
+        .red-column {
+            background-color: red;
+            color: white;
+            font-weight: 500;
+        }
+        .blue-column {
+            background-color: blue;
+            color: white;
+            font-weight: 500;
+            font-size: 15px;
+        }
+        .drop-zone {
+            min-height: 40px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="selected" class="selected"></div>
+
+    <table id="imageTable">
+        <tr>
+            <th class="red-column" ondragover="allowDrop(event)" ondrop="dropImage(event)">Red Column</th>
+            <th class="blue-column" ondragover="allowDrop(event)" ondrop="dropImage(event)">Blue Column</th>
+        </tr>
+        <tr>
+            <td class="red-column" ondragover="allowDrop(event)" ondrop="dropImage(event)"></td>
+            <td class="blue-column" ondragover="allowDrop(event)" ondrop="dropImage(event)"></td>
+        </tr>
+    </table>
+</body>
+<script src="selected.js"></script>
+</html>
