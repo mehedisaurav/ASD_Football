@@ -78,13 +78,20 @@
             }
 
             #selected label {
-                width: 10vw;
+                width: 6vw;
                 min-width: 70px;
-                object-fit: cover;
-                border-radius: 8px;
-                opacity: 0;
-                animation: fadeIn 0.5s forwards; /* Animation added here */
-                transition: transform 0.3s ease;
+                display: grid;
+                align-items: center;
+                height: 6vw;
+                border-radius: 10px;
+                transition: transform 0.3s ease, filter 0.3s ease;
+                cursor: pointer;
+                margin: 5px;
+                text-align: center;
+                background-color: cadetblue;
+                color: firebrick;
+                font-size: 20px;
+                font-weight: 600;
             }
             button {
                 margin-top: 20px;
@@ -159,7 +166,7 @@
 
         </div>
         <div>
-            <button onclick="goToSelectedPage()">Go to Selected Page</button>
+            <button id="teammake" onclick="goToSelectedPage()">Team Make</button>
             <button onclick="clean()">Clear</button>
         </div> 
         <div id="selected" class="selected"></div>

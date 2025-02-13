@@ -77,21 +77,45 @@
             gap: 10px;
             padding: 10px;
         }
+        .team{
+            display: grid;
+            grid-template-rows: 2fr;
+            align-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        #imageTable{
+            width: 100%;
+        }
+        .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            padding: 3px 5px;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body>
-    <div id="selected" class="selected"></div>
+    <div class="team">
+        <div id="selected" class="selected" ></div>
 
     <table id="imageTable">
         <tr>
-            <th class="red-column" ondragover="allowDrop(event)" ondrop="dropImage(event)">Red Sniper</th>
-            <th class="blue-column" ondragover="allowDrop(event)" ondrop="dropImage(event)">Blue Whale</th>
+            <th class="red-column" ondragover="allowDrop(event)" ondrop="dropImage(event)" >Red Sniper</th>
+            <th class="blue-column" ondragover="allowDrop(event)" ondrop="dropImage(event)" >Blue Whale</th>
         </tr>
         <tr>
-            <td class="red-column" ondragover="allowDrop(event)" ondrop="dropImage(event)"></td>
+            <td class="red-column" ondragover="allowDrop(event)" ondrop="dropImage(event)" ></td>
             <td class="blue-column" ondragover="allowDrop(event)" ondrop="dropImage(event)"></td>
         </tr>
     </table>
+    </div>
 </body>
 <script src="selected.js"></script>
 </html>
