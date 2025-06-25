@@ -56,6 +56,8 @@
             max-width: 600px;
             border-collapse: collapse;
             text-align: center;
+            border-radius: 20px;
+            overflow: hidden;
         }
 
         th,
@@ -66,13 +68,13 @@
         }
 
         .red-column {
-            background-color: red;
+            background-color: #e74c3c;
             color: white;
             font-weight: 500;
         }
 
         .blue-column {
-            background-color: blue;
+            background-color: #3498db;
             color: white;
             font-weight: 500;
             font-size: 15px;
@@ -132,12 +134,12 @@
 
         <table id="imageTable">
             <tr>
-                <th class="red-column" ondragover="allowDrop(event)" ondrop="dropImage(event)">Red Sniper</th>
+                <th class="red-column" ondragover="allowDrop(event)" ondrop="dropImage(event)">Red Snapper</th>
                 <th class="blue-column" ondragover="allowDrop(event)" ondrop="dropImage(event)">Blue Whale</th>
             </tr>
             <tr>
-                <td class="red-column" ondragover="allowDrop(event)" ondrop="dropImage(event)"></td>
-                <td class="blue-column" ondragover="allowDrop(event)" ondrop="dropImage(event)"></td>
+                <td class="red-column" ondragover="allowDrop(event)" ondrop="dropImage(event)">(C) &nbsp;</td>
+                <td class="blue-column" ondragover="allowDrop(event)" ondrop="dropImage(event)">(C) &nbsp;</td>
             </tr>
         </table>
     </div>
