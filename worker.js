@@ -1,8 +1,10 @@
 const selectedDiv = document.getElementById("selected");
+// let storedImages = JSON.parse(localStorage.getItem("selectedImages")) || [];
+ let storedImages = []; 
 document.addEventListener("DOMContentLoaded", function () {
     const selectedDiv = document.getElementById("selected");
-    const storedImages = JSON.parse(localStorage.getItem("selectedImages")) || [];
-let count = 0;
+
+    let count = 0;
     selectedDiv.innerHTML = ""; // Clear previous content
 
     if (storedImages.length > 0) {
@@ -22,7 +24,7 @@ let count = 0;
 
 
 function selectImage(event) {
-    
+
     const img = event.target;
     // Toggle the 'checked' class
     img.classList.toggle('checked');
@@ -42,34 +44,49 @@ function selectImage(event) {
             }
         }
     }
-    document.getElementById("teammake").innerText = `Team Make(${selectedDiv.children.length-1})`;
+    document.getElementById("teammake").innerText = `Team Make(${selectedDiv.children.length - 1})`;
 }
 
-
-
- 
-function clean(){
-    localStorage.clear(); 
+function clean() {
+    localStorage.clear();
 
     let childs = selectedDiv.getElementsByTagName('label');
-    let count=childs.length;
-        for (let i = 0; i <= childs.length; i++) {
+    let count = childs.length;
+    for (let i = 0; i <= childs.length; i++) {
 
-            selectedDiv.removeChild(childs[0]);
-            count--;
-        }
-        document.getElementById("teammake").innerText = `Team Make(${count})`;
+        selectedDiv.removeChild(childs[0]);
+        count--;
+    }
+    document.getElementById("teammake").innerText = `Team Make(${count})`;
 }
 
-function goToSelectedPage(){
-    
+function goToSelectedPage() {
+
     let selectedImages = [];
     const images = selectedDiv.getElementsByTagName('label');
-        for (let i = 0; i < images.length; i++) {
-                selectedImages.push(images[i].textContent);
-        }
+    for (let i = 0; i < images.length; i++) {
+        selectedImages.push(images[i].textContent);
+    }
     localStorage.setItem("selectedImages", JSON.stringify(selectedImages));
-    window.location.href="selected.html";
+    window.location.href = "selected.html";
 }
 
+function addNewPlayer(event) {
+    event.stopPropagation();
+    const name = prompt("Enter new player name:");
+    if (name && name.trim()) {
+        const gallery = document.querySelector('.gallery');
+        const newLabel = document.createElement('label');
+
+        newLabel.setAttribute('alt', `Image ${document.querySelectorAll('.gallery label').length + 1}`);
+        newLabel.setAttribute('onclick', 'selectImage(event)');
+        newLabel.className = 'man'
+        newLabel.textContent = name.trim();
+        newLabel.style.display = "inline-block; text-align: center;";
+        gallery.appendChild(newLabel);
+        const addPlayerLabel = gallery.querySelector('label[alt="Add Player"]');
+        gallery.insertBefore(newLabel, addPlayerLabel);
+        document.getElementById("teammake").innerText = `Team Make(${selectedDiv.children.length - 1})`;
+    }
+}
 

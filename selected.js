@@ -18,21 +18,21 @@ const selectedDiv = document.getElementById("selected");
 //     }
 // });
 
-function addChildInSelectedItem(src, index){
+function addChildInSelectedItem(src, index) {
     const img = document.createElement("label");
-            img.textContent = src;
-            img.alt = src;
-            img.title = src;
-            img.draggable = true;
-            img.ondragstart = dragStart;
-            img.ondragend = removeImage;
-            img.id = "label-" + index;
-            img.ondragstart = dragStart;
-            selectedDiv.appendChild(img);
+    img.textContent = src;
+    img.alt = src;
+    img.title = src;
+    img.draggable = true;
+    img.ondragstart = dragStart;
+    img.ondragend = removeImage;
+    img.id = "label-" + index;
+    img.ondragstart = dragStart;
+    selectedDiv.appendChild(img);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    
+
     const storedImages = JSON.parse(localStorage.getItem("selectedImages")) || [];
 
     selectedDiv.innerHTML = ""; // Clear previous content
@@ -89,47 +89,45 @@ function dropImage(event) {
         selectedDiv.removeChild(draggedImage);
         // Determine drop target and assign image to correct column
         if (event.target.className === 'red-column') {
-            if(document.querySelectorAll('tr td.red-column').length > 0 && !document.querySelectorAll('tr td.red-column')[document.querySelectorAll('tr td.red-column').length - 1].querySelector('label'))
-                {
-                    for(let i=0; i<document.querySelectorAll('tr td.red-column').length; i++) {
-                        if(!document.querySelectorAll('tr td.red-column')[i].querySelector('label')){
-                            document.querySelectorAll('tr td.red-column')[i].appendChild(clonedImage);
-                            // selectedDiv.removeChild(clonedImage);
-                            redColumn.onclick = `clean(${draggedImage.id})`
-                            break;
-                        }
-                    }  
-                    
+            if (document.querySelectorAll('tr td.red-column').length > 0 && !document.querySelectorAll('tr td.red-column')[document.querySelectorAll('tr td.red-column').length - 1].querySelector('label')) {
+                for (let i = 0; i < document.querySelectorAll('tr td.red-column').length; i++) {
+                    if (!document.querySelectorAll('tr td.red-column')[i].querySelector('label')) {
+                        document.querySelectorAll('tr td.red-column')[i].appendChild(clonedImage);
+                        // selectedDiv.removeChild(clonedImage);
+                        redColumn.onclick = `clean(${draggedImage.id})`
+                        break;
+                    }
                 }
-                else{
-                    redColumn.onclick = `clean(${draggedImage.id})`
-                    redColumn.appendChild(clonedImage);
-                    newRow.appendChild(redColumn);
-                    newRow.appendChild(blueColumn);
-                    table.appendChild(newRow);
-                }
+
+            }
+            else {
+                redColumn.onclick = `clean(${draggedImage.id})`
+                redColumn.appendChild(clonedImage);
+                newRow.appendChild(redColumn);
+                newRow.appendChild(blueColumn);
+                table.appendChild(newRow);
+            }
         } else {
-            if(document.querySelectorAll('tr td.blue-column').length  > 0 && !document.querySelectorAll('tr td.blue-column')[document.querySelectorAll('tr td.blue-column').length - 1].querySelector('label'))
-                {
-                    for(let i=0; i<document.querySelectorAll('tr td.blue-column').length; i++) {
-                        if(!document.querySelectorAll('tr td.blue-column')[i].querySelector('label')){
-                            document.querySelectorAll('tr td.blue-column')[i].appendChild(clonedImage);
-                            // selectedDiv.removeChild(clonedImage);
-                            blueColumn.onclick = `clean(${draggedImage.id})`
-                            break;
-                        }
-                    } 
+            if (document.querySelectorAll('tr td.blue-column').length > 0 && !document.querySelectorAll('tr td.blue-column')[document.querySelectorAll('tr td.blue-column').length - 1].querySelector('label')) {
+                for (let i = 0; i < document.querySelectorAll('tr td.blue-column').length; i++) {
+                    if (!document.querySelectorAll('tr td.blue-column')[i].querySelector('label')) {
+                        document.querySelectorAll('tr td.blue-column')[i].appendChild(clonedImage);
+                        // selectedDiv.removeChild(clonedImage);
+                        blueColumn.onclick = `clean(${draggedImage.id})`
+                        break;
+                    }
                 }
-                else{
-                    blueColumn.onclick
-                     = `clean(${draggedImage.id})`
-                    blueColumn.appendChild(clonedImage);
-                    newRow.appendChild(redColumn);
-                    newRow.appendChild(blueColumn);
-                    table.appendChild(newRow);
-                }
+            }
+            else {
+                blueColumn.onclick
+                    = `clean(${draggedImage.id})`
+                blueColumn.appendChild(clonedImage);
+                newRow.appendChild(redColumn);
+                newRow.appendChild(blueColumn);
+                table.appendChild(newRow);
+            }
         }
-       
+
     }
 }
 
